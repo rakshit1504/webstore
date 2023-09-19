@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Cart</title>
+
+    <!-- Add Bootstrap CSS (place this code before your custom styles) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #06142E; /* Background color changed to match the product page */
+            color: #F5D7DB; /* Text color changed to match the product page */
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #1B3358; /* Header background color changed to match the product page */
+            font-family: 'Pacifico', cursive;
+            color: #fff;
+            text-align: center;
+            padding: 0px;
+            font-size: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .cart {
+            background-color: #473E66; /* Cart background color changed to match the product page */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #F1916D; /* Heading color changed to match the product page */
+        }
+
+        .cart-items {
+            font-size: 1.2rem;
+            color: #7a6354;
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #1B3358; /* Button background color changed to match the product page */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Additional Styles for Buttons */
+        .nav-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            background-color: #1B3358; /* Button background color changed to match the product page */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #06142E; /* Footer background color changed to match the product page */
+            color: #F5D7DB; /* Footer text color changed to match the product page */
+            text-align: center;
+            padding: 50px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+<header class="bg-primary text-white">
+    <div class="container">
+        <h1>Cart</h1>
+    </div>
+</header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="p2product.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="p3cart.html">Cart</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <div class="cart-items">
+            <!-- Cart items will be displayed here dynamically using JavaScript -->
+        </div>
+        <p class="cart-total">Total: $0.00</p>
+        <a href="product.html" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+<footer class="bg-primary text-white text-center py-3">
+    <p>&copy; 2023 Bookscart. All rights reserved.</p>
+</footer>
+
+<!-- Add Bootstrap JavaScript (place this code before your custom JavaScript) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Function to display cart items and calculate total
+    function displayCartItems() {
+        let cartHtml = '';
+        let totalPrice = 0;
+
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        cartItems.forEach((item) => {
+            totalPrice += item.price;
+            cartHtml += `
+                <div class="cart-item">
+                    <p>${item.name} - $${item.price.toFixed(2)}</p>
+                </div>
+            `;
+        });
+
+        // Update the cart display
+        const cartDisplay = document.querySelector('.cart-items');
+        const cartTotal = document.querySelector('.cart-total');
+        cartDisplay.innerHTML = cartHtml;
+        cartTotal.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    }
+
+    // Initial display of cart items
+    displayCartItems();
+</script>
+</body>
+</html>
